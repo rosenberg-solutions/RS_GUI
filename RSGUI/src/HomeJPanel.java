@@ -11,28 +11,30 @@ import javax.swing.plaf.FontUIResource;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyJPanel extends JFrame {
+public class HomeJPanel extends JFrame {
 
-    private JFrame f;
-    private JPanel p;
-    private JTabbedPane t;
+    static private JFrame f;
+    static private JPanel p;
+    static private JTabbedPane t;
+    static private JButton b;
 
 
     /**
      * Constructor initializes panel
      */
-    MyJPanel(){
+    HomeJPanel(){
 
-        setTitle("Rosenberg Solutions ");
+    };
+
+     JPanel getJPanel(){
         setLayout(null);
         setBounds(100,100, 800,800 );
         p = new JPanel();
-        add(p);
-
+        b = new JButton("hell0");
+        p.add(b);
         p.setBounds(400,400,200,200);
-        setVisible(true);
-
-    };
+        return  p;
+   }
 
 
 }
