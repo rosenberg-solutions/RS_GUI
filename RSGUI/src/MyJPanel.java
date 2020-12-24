@@ -15,6 +15,7 @@ public class MyJPanel extends JFrame {
 
     private JFrame f;
     private JPanel p;
+    private JTabbedPane t;
 
 
     /**
@@ -27,6 +28,7 @@ public class MyJPanel extends JFrame {
         setBounds(100,100, 800,800 );
         p = new JPanel();
         add(p);
+
         p.setBounds(400,400,200,200);
         setVisible(true);
 
