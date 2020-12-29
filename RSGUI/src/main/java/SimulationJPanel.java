@@ -1,3 +1,5 @@
+package main.java;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,10 +7,21 @@ import org.json.JSONObject;
 public class SimulationJPanel extends JFrame implements ActionListener {
 
     static private JPanel p;
+    static private JButton save;
     static private JLabel DOE, DOEFile, timeStart, timeEnd, dt, relaxationFactor;
     static private JTextField DOEFileField, timeStartField, timeEndField, dtField, relaxationFactorField;
     static private String[] trueFalse = new String[]{"True","False"};
     static private JComboBox<String>TF;
+
+    public static JSONObject getSimulation() {
+        return simulation;
+    }
+
+    public static void setSimulation(JSONObject simulation) {
+        SimulationJPanel.simulation = simulation;
+    }
+
+    static private JSONObject  simulation;
 
     /**
      * getpanel returns the panel with gui components and will be called in main Driver
@@ -36,10 +49,10 @@ public class SimulationJPanel extends JFrame implements ActionListener {
         timeStart = new JLabel("Time Start (0.0)");
         timeStart.setBounds(200,250,100,50);
         timeStartField = new JTextField(15);
-        timeStartField.setBounds(350,250, 150,30);
+        timeStartField.setBounds(350,250, 100,30);
 
         // End time
-        timeEnd = new JLabel("Time  (0.0)");
+        timeEnd = new JLabel(" Time End  (0.0)");
         timeEnd.setBounds(200,300, 100,50);
         timeEndField = new JTextField(15);
         timeEndField.setBounds(350,300, 100,30);
@@ -64,26 +77,31 @@ public class SimulationJPanel extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(TF.getSelectedItem() =="False"){
-                    DOEFileField.setEditable(false);
-                    DOEFileField.setEditable(false);
-                    timeStartField.setEditable(false);
-                    timeEndField.setEditable(false);
-                    relaxationFactorField.setEditable(false);
 
                 }
                 if(TF.getSelectedItem() =="True"){
-
-                    DOEFileField.setEditable(true);
-                    DOEFileField.setEditable(true);
-                    timeStartField.setEditable(true);
-                    timeEndField.setEditable(true);
-                    relaxationFactorField.setEditable(true);
-
-
-
+                    //create dEO file
 
                 }
 
+            }
+        });
+
+        //save button
+        save = new JButton("save");
+        save.setBounds(350,450,100,30);
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                simulation = new JSONObject();
+                simulation.put("DOE", TF.getSelectedItem());
+                simulation.put("DOE_File", DOEFileField.getText());
+                simulation.put("timeStart",timeStartField.getText());
+                simulation.put("timeEnd",timeEndField.getText());
+                simulation.put("dt",dtField.getText());
+                simulation.put("relaxation_factor",relaxationFactorField.getText());
+
+                System.out.println(simulation);
             }
         });
 
@@ -101,6 +119,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
         p.add(dtField);
         p.add(relaxationFactor);
         p.add(relaxationFactorField);
+        p.add(save);
         return  p;
     }
 

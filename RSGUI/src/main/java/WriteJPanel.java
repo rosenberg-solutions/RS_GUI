@@ -1,7 +1,8 @@
+package main.java;
+
 import javax.swing.*;
 
-public class WindJPanel extends JFrame {
-
+public class WriteJPanel extends JFrame {
     static private JPanel p;
 
     JPanel getJPanel(){
@@ -12,4 +13,6 @@ public class WindJPanel extends JFrame {
         p.setBounds(400,400,200,200);
         return  p;
     }
+
+
 }

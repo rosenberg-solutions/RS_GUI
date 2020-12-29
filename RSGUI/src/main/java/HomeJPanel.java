@@ -1,4 +1,4 @@
-/**
+package main.java; /**
  * My JPanel Class will implement the GUI and allow user
  * to input user information
  */
@@ -23,6 +23,27 @@ public class HomeJPanel extends JFrame  implements ActionListener{
     static private JButton saveButton;
     static private JLabel nameLabel, versionLabel;
     static private JTextField nameField;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    private String fileName;
+
+    public static JSONObject getFiletype() {
+        return filetype;
+    }
+
+    public static void setFiletype(JSONObject filetype) {
+        HomeJPanel.filetype = filetype;
+    }
+
+
+    static private JSONObject filetype;
     static private JComboBox<String> versionCombobox;
     static private String[] versionString = new String[]{ "0.0.1","0.0.2", "0.0.3 "};
 
@@ -38,8 +59,14 @@ public class HomeJPanel extends JFrame  implements ActionListener{
 
         nameLabel = new JLabel(" File Name");
         nameLabel.setBounds(100, 190, 100,50);
-        nameField = new JTextField(15);
+        nameField = new JTextField("",15);
         nameField.setBounds(200,200,200,30);
+        nameField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getName();
+            }
+        });
 
 
         versionLabel = new JLabel("GAVLL Version");
@@ -48,23 +75,17 @@ public class HomeJPanel extends JFrame  implements ActionListener{
         versionCombobox.setBounds(200,250, 200,25);
 
 
+
          saveButton = new JButton("save");
-         saveButton.setBounds(450,240,50,50);
+         saveButton.setBounds(450,250,75,25);
          saveButton.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 JSONObject filetype = new JSONObject();
+                 filetype = new JSONObject();
                  filetype.put("name",nameField.getText());
                  filetype.put("version",versionCombobox.getSelectedItem());
-                 try {
-                     FileWriter file = new FileWriter(nameField.getName() + ".JSON");
-                     file.write(filetype.toString());
-                     System.out.print(filetype);
-                     file.flush();
-                 }catch(IOException e1 ){
-                        e1.printStackTrace();
-                        System.out.print(" error in creating file");
-                 }
+                 System.out.println(filetype);
+
              }
          });
 
@@ -85,4 +106,6 @@ public class HomeJPanel extends JFrame  implements ActionListener{
 
 
     }
+
+
 }
