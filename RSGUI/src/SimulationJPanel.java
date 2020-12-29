@@ -11,7 +11,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
     static private JComboBox<String>TF;
 
     /**
-     * getpanel returns the panel with gui components
+     * getpanel returns the panel with gui components and will be called in main Driver
      * @return
      */
     JPanel getJPanel(){
