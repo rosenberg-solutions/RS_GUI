@@ -3,38 +3,86 @@
  * to input user information
  */
 
+import org.json.JSONObject;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.Graphics;
+
 import javax.swing.JFrame;
-import javax.swing.plaf.FontUIResource;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomeJPanel extends JFrame {
+import java.io.FileWriter;
+import java.io.IOException;
 
-    static private JFrame f;
+public class HomeJPanel extends JFrame  implements ActionListener{
+
+
     static private JPanel p;
-    static private JTabbedPane t;
-    static private JButton b;
+    static private JButton saveButton;
+    static private JLabel nameLabel, versionLabel;
+    static private JTextField nameField;
+    static private JComboBox<String> versionCombobox;
+    static private String[] versionString = new String[]{ "0.0.1","0.0.2", "0.0.3 "};
 
-
-    /**
-     * Constructor initializes panel
-     */
-    HomeJPanel(){
-
-    };
 
      JPanel getJPanel(){
         setLayout(null);
         setBounds(100,100, 800,800 );
         p = new JPanel();
-        b = new JButton("hell0");
-        p.add(b);
-        p.setBounds(400,400,200,200);
+        p.setLayout(null);
+        p.setBounds(100,700,200,200);
+
+
+
+        nameLabel = new JLabel(" File Name");
+        nameLabel.setBounds(100, 190, 100,50);
+        nameField = new JTextField(15);
+        nameField.setBounds(200,200,200,30);
+
+
+        versionLabel = new JLabel("GAVLL Version");
+        versionLabel.setBounds(100, 240,100,50);
+        versionCombobox = new JComboBox<String>(versionString);
+        versionCombobox.setBounds(200,250, 200,25);
+
+
+         saveButton = new JButton("save");
+         saveButton.setBounds(450,240,50,50);
+         saveButton.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 JSONObject filetype = new JSONObject();
+                 filetype.put("name",nameField.getText());
+                 filetype.put("version",versionCombobox.getSelectedItem());
+                 try {
+                     FileWriter file = new FileWriter(nameField.getName() + ".JSON");
+                     file.write(filetype.toString());
+                     System.out.print(filetype);
+                     file.flush();
+                 }catch(IOException e1 ){
+                        e1.printStackTrace();
+                        System.out.print(" error in creating file");
+                 }
+             }
+         });
+
+
+        p.add(nameLabel);
+        p.add(nameField);
+        p.add(versionLabel);
+        p.add(versionCombobox);
+        p.add(saveButton);
+        p.add(versionLabel);
         return  p;
    }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+
+
+    }
 }
