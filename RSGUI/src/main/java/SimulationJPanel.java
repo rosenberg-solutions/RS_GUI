@@ -1,5 +1,4 @@
 package main.java;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,11 +22,22 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
     static private JSONObject  simulation;
 
+    public static JSONObject getSimulationObject() {
+        return simulationObject;
+    }
+
+    public static void setSimulationObject(JSONObject simulationObject) {
+        SimulationJPanel.simulationObject = simulationObject;
+    }
+
+    private static JSONObject simulationObject;
+
     /**
      * getpanel returns the panel with gui components and will be called in main Driver
      * @return
      */
     JPanel getJPanel(){
+        setLayout(null);
         setBounds(100,100, 800,800 );
         //panel
         p = new JPanel();
@@ -101,7 +111,10 @@ public class SimulationJPanel extends JFrame implements ActionListener {
                 simulation.put("dt",dtField.getText());
                 simulation.put("relaxation_factor",relaxationFactorField.getText());
 
-                System.out.println(simulation);
+                simulationObject =new JSONObject();
+                simulationObject.put("simulation",simulation);
+
+                System.out.println(simulationObject);
             }
         });
 

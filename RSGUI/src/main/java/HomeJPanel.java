@@ -4,17 +4,12 @@ package main.java; /**
  */
 
 import org.json.JSONObject;
-
 import javax.swing.*;
-
 import javax.swing.JFrame;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.io.FileWriter;
-import java.io.IOException;
+
 
 public class HomeJPanel extends JFrame  implements ActionListener{
 
@@ -44,6 +39,16 @@ public class HomeJPanel extends JFrame  implements ActionListener{
 
 
     static private JSONObject filetype;
+
+    public static JSONObject getFiletypeObject() {
+        return filetypeObject;
+    }
+
+    public static void setFiletypeObject(JSONObject filetypeObject) {
+        HomeJPanel.filetypeObject = filetypeObject;
+    }
+
+    static private  JSONObject filetypeObject;
     static private JComboBox<String> versionCombobox;
     static private String[] versionString = new String[]{ "0.0.1","0.0.2", "0.0.3 "};
 
@@ -84,7 +89,10 @@ public class HomeJPanel extends JFrame  implements ActionListener{
                  filetype = new JSONObject();
                  filetype.put("name",nameField.getText());
                  filetype.put("version",versionCombobox.getSelectedItem());
-                 System.out.println(filetype);
+
+                filetypeObject= new JSONObject();
+                 filetypeObject.put("filetype",filetype);
+                 System.out.println(filetypeObject);
 
              }
          });
