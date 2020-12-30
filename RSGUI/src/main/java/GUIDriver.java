@@ -40,17 +40,15 @@ public class GUIDriver {
 
         frame.add(tp);
 
-        //writing file with user clicks the submit button
+
         submit.addActionListener(e -> {
-            // FileWriter  file1 = new FileWriter(home.getFileName());
+
             JSONArray windFarm_x1 = new JSONArray();
-
-            //file1.write(HomeJPanel.getFiletype().toString());
-            //file1.write(SimulationJPanel.getSimulation().toString());
-
+            //creating a Json array to put in json objects for file
             windFarm_x1.put(HomeJPanel.getFiletypeObject());
             windFarm_x1.put(SimulationJPanel.getSimulationObject());
             windFarm_x1.put(WindJPanel.getWindObject());
+            windFarm_x1.put(WriteJPanel.getWriteObject());
             try ( FileWriter  file1 = new FileWriter("test.json")){
                 System.out.println("Hi I am in try");
                 file1.write(windFarm_x1.toString());

@@ -19,6 +19,7 @@ public class WindJPanel extends JFrame {
     static private JButton save;
     static private JSONObject wind;
 
+
     public static JSONObject getWindObject() {
         return windObject;
     }
