@@ -26,7 +26,7 @@ public class GUIDriver {
         WriteJPanel write = new WriteJPanel();
         ReviewJPanel review = new ReviewJPanel();
 
-        JButton submit = new JButton("Submit");
+        JButton submit = new JButton("Write File");
         submit.setBounds(100, 600, 100, 100);
         frame.add(submit);
         frame.add(tp);
@@ -50,6 +50,7 @@ public class GUIDriver {
 
             windFarm_x1.put(HomeJPanel.getFiletypeObject());
             windFarm_x1.put(SimulationJPanel.getSimulationObject());
+            windFarm_x1.put(WindJPanel.getWindObject());
             try ( FileWriter  file1 = new FileWriter("test.json")){
                 System.out.println("Hi I am in try");
                 file1.write(windFarm_x1.toString());

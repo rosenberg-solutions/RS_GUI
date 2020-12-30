@@ -1,14 +1,34 @@
 package main.java;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WindJPanel extends JFrame {
 
     static private JPanel p;
-    static private JLabel type, shear, u_mean, h_ref, rho, direction;
-    static private JTextField  shearField, u_meanField, h_refField, rhoField, directionField;
+    static private JLabel type, shear, u_mean, h_ref, rho, direction, X, Y, Z;
+    static private JTextField  shearField, u_meanField, h_refField, rhoField, directionField, xField, yField, zField;
     static private String[] typeWind = new String[]{"Deterministic", " other types "};
     static private JComboBox<String> types;
+    static private JButton save;
+    static private JSONObject wind;
+
+    public static JSONObject getWindObject() {
+        return windObject;
+    }
+
+    public static void setWindObject(JSONObject windObject) {
+        WindJPanel.windObject = windObject;
+    }
+
+    static private JSONObject windObject;
+    static private JSONArray coordinates;
 
 
     JPanel getJPanel(){
@@ -52,7 +72,52 @@ public class WindJPanel extends JFrame {
         direction = new JLabel("Direction");
         direction.setBounds(200,400,150,30);
         directionField = new JTextField(15);
-        directionField.setBounds(350,400,100,30);
+        //directionField.setBounds(350,400,100,30);
+
+        //separate GUI field for getting direction coordinates
+        X = new JLabel("X_Coordinate");
+        X.setBounds(350,400,100,30);
+        xField = new JTextField(10);
+        xField.setBounds(450,400,100,30);
+
+        Y = new JLabel("Y_Coordinate");
+        Y.setBounds(350,420,100,30);
+        yField = new JTextField(10);
+        yField.setBounds(450,420,100,30);
+
+        Z = new JLabel("Z_Coordinate");
+        Z.setBounds(350,440,100,30);
+        zField = new JTextField(10);
+        zField.setBounds(450,440,100,30);
+
+        //save button
+        save = new JButton("Save");
+        save.setBounds(300,600,100,50);
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                wind = new JSONObject();
+                coordinates = new JSONArray();
+                windObject = new JSONObject();
+                wind.put("type",types.getSelectedItem());
+                wind.put("shear",shearField.getText());
+                wind.put("u_mean", u_meanField.getText());
+                wind.put("h_ref",h_refField.getText());
+                wind.put("rho",rhoField.getText());
+
+                //creating a Json array for direction coordinates
+
+                coordinates.put(xField.getText());
+                coordinates.put(yField.getText());
+                coordinates.put(zField.getText());
+                wind.put("direction",coordinates);
+
+                //adding all Json objects to json array windObject
+                windObject.put("wind", wind);
+                System.out.println(windObject);
+            }
+        });
 
         p.add(type);
         p.add(types);
@@ -65,7 +130,15 @@ public class WindJPanel extends JFrame {
         p.add(h_ref);
         p.add(h_refField);
         p.add(direction);
-        p.add(directionField);
+        //p.add(directionField);
+        p.add(save);
+        p.add(X);
+        p.add(xField);
+        p.add(Y);
+        p.add(yField);
+        p.add(Z);
+        p.add(zField);
+
 
 
 
