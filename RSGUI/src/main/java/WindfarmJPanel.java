@@ -13,9 +13,6 @@ public class WindfarmJPanel extends JFrame {
     private int countTurbine =0;
     static private JSONObject windFarmObject, n_turbines, turbines, ID, X, rpm, pitch, outputFile, initIndDist, initInduction, nRot, rot_trefftz;
     static private JTable windTable;
-    //final private String columnNames[] = {"n_turbine","ID","X","rpm","pitch","input_file","initIndDist","initInduction","nRot","rot_treet"};
-   //static private String data[][]= {{"1","0","0,0,0","12.0","0.0","outputPath/file","linear", "4.0","0.1","0.9"}
-    //,{"2", "0","0,0,0","12.0","0.0","outputPath/file","linear", "4.0","0.1","0.9"}};
     static private JScrollPane scrollTable;
     JPanel getJPanel(){
 
@@ -32,7 +29,8 @@ public class WindfarmJPanel extends JFrame {
         turbineLabel = new JLabel("Number of Turbines: " + Integer.toString(countTurbine));
         turbineLabel.setBounds(200,50,150,30);
 
-        DefaultTableModel model= new DefaultTableModel();
+        //Creating a table for turbine input data
+        DefaultTableModel model= new DefaultTableModel(); //this default will allow rows to be added
         model.addColumn("n_turbines");
         model.addColumn("ID");
         model.addColumn("x");
@@ -44,7 +42,6 @@ public class WindfarmJPanel extends JFrame {
         model.addColumn("nRot");
         model.addColumn("rot_trefftz");
         windTable = new JTable(model);
-
         scrollTable =new JScrollPane(windTable);
         scrollTable.setBounds(200,200,700,400);
 
