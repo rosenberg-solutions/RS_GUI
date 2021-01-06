@@ -16,7 +16,7 @@ public class GUIDriver {
 
 
         JFrame frame = new JFrame();
-        frame.setBounds(250, 250, 800, 800);
+        frame.setBounds(250, 250, 1000, 800);
         JTabbedPane tp = new JTabbedPane();
         tp.setBackground(Color.BLACK);
         HomeJPanel home = new HomeJPanel();
