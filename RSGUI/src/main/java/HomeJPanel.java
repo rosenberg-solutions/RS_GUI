@@ -88,11 +88,14 @@ public class HomeJPanel extends JFrame  implements ActionListener{
              public void actionPerformed(ActionEvent e) {
                  filetype = new JSONObject();
                  filetype.put("name",nameField.getText());
-                 filetype.put("version",versionCombobox.getSelectedItem());
+                 filetype.put("version", versionCombobox.getSelectedItem());
+                 //filetype.put("version",Double.parseDouble(versionCombobox.getSelectedItem().toString()));
+                 versionCombobox.getSelectedItem();
+                // Integer.parseInt(versionCombobox.getSelectedItem().toString());
 
-                filetypeObject= new JSONObject();
-                 filetypeObject.put("filetype",filetype);
-                 System.out.println(filetypeObject);
+               // filetypeObject= new JSONObject();
+               //  filetypeObject.put("filetype",filetype);
+                 System.out.println(filetype);
 
              }
          });

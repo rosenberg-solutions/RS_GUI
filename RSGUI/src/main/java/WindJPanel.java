@@ -17,6 +17,15 @@ public class WindJPanel extends JFrame {
     static private String[] typeWind = new String[]{"Deterministic", " other types "};
     static private JComboBox<String> types;
     static private JButton save;
+
+    public static JSONObject getWind() {
+        return wind;
+    }
+
+    public static void setWind(JSONObject wind) {
+        WindJPanel.wind = wind;
+    }
+
     static private JSONObject wind;
 
 
@@ -115,8 +124,8 @@ public class WindJPanel extends JFrame {
                 wind.put("direction",coordinates);
 
                 //adding all Json objects to json array windObject
-                windObject.put("wind", wind);
-                System.out.println(windObject);
+                //windObject.put("wind", wind);
+                System.out.println(wind);
             }
         });
 

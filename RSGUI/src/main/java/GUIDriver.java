@@ -3,6 +3,7 @@ package main.java;
 import javax.swing.*;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.awt.*;
 import java.io.FileWriter;
@@ -34,7 +35,7 @@ public class GUIDriver {
         tp.add("Simulation", simulation.getJPanel());
         tp.add("Wind", wind.getJPanel());
         tp.add("Write", write.getJPanel());
-        tp.add("Wind Farm ", windfarm.getJPanel());
+        tp.add("Turbine", windfarm.getJPanel());
         tp.add("Review File", review.getJPanel());
 
 
@@ -43,16 +44,21 @@ public class GUIDriver {
 
         submit.addActionListener(e -> {
 
-            JSONArray windFarm_x1 = new JSONArray();
+            JSONObject windFarm_x1 = new JSONObject();
             //creating a Json array to put in json objects for file
-            windFarm_x1.put(HomeJPanel.getFiletypeObject());
-            windFarm_x1.put(SimulationJPanel.getSimulationObject());
-            windFarm_x1.put(WindJPanel.getWindObject());
-            windFarm_x1.put(WriteJPanel.getWriteObject());
+
+            windFarm_x1.put("FileType",HomeJPanel.getFiletype());
+            windFarm_x1.put("Simulation",SimulationJPanel.getSimulation());
+            windFarm_x1.put("Wind",WindJPanel.getWind());
+            windFarm_x1.put("Write",WriteJPanel.getWrite());
+
+
+
             try ( FileWriter  file1 = new FileWriter("test.json")){
                 System.out.println("Hi I am in try");
                 file1.write(windFarm_x1.toString());
                 file1.flush();
+               // file1.close();
                 System.out.print(file1);
 
             } catch (IOException e1) {

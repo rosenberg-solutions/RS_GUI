@@ -11,6 +11,15 @@ public class WriteJPanel extends JFrame {
     static private JButton save;
     static private JLabel output_directory, dt1, bladeWrite, latticeWrite, infCoeffWrite, CPWrite, indVelWrite,elemVelWrite;
     static private JTextField output_directoryField, dt1Field, bladeWriteField, latticeWriteField, infCoeffWriteField, CPWriteField, indVelWriteField,elemVelWriteField;
+
+    public static JSONObject getWrite() {
+        return write;
+    }
+
+    public static void setWrite(JSONObject write) {
+        WriteJPanel.write = write;
+    }
+
     static private JSONObject write;
     static private String[] trueFalse = new String[]{"True","False"};
     static private JComboBox<String> bladewriteBox, latticeWriteBox,infCoeffWriteBox,CPWriteBox,indVelWriteBox,elemVelWriteBox;
@@ -95,8 +104,8 @@ public class WriteJPanel extends JFrame {
                  write.put("indVelWrite",indVelWriteBox.getSelectedItem());
                  write.put("elemVelWrite",elemVelWriteBox.getSelectedItem());
 
-                writeObject.put("write",write);
-                System.out.println(writeObject);
+               // writeObject.put("write",write);
+                System.out.println(write);
 
 
 

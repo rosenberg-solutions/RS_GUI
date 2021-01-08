@@ -2,8 +2,10 @@ package main.java;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +18,8 @@ public class WindfarmJPanel extends JFrame {
     static private JSONObject windFarmObject,turbine, n_turbines, ID, X, rpm, pitch, outputFile, initIndDist, initInduction, nRot, rot_trefftz;
     static private JTable windTable;
     static private JScrollPane scrollTable;
+    static private JComboBox<String> turbineComboBox;
+    static private String[] optionTurbine = {"Turbine1", "Turbine2", "Turbine3", "Turbine4","Turbine5"};
     //static private JSONArray turbine;
     JPanel getJPanel(){
 
@@ -41,14 +45,20 @@ public class WindfarmJPanel extends JFrame {
         model.addColumn("x");
         model.addColumn("rpm");
         model.addColumn("pitch");
-        model.addColumn("Output File ");
+        model.addColumn("Input File ");
         model.addColumn("initIndDist");
         model.addColumn("initInduction");
         model.addColumn("nRot");
         model.addColumn("rot_trefftz");
+
+        turbineComboBox = new JComboBox<>(optionTurbine);
         windTable = new JTable(model);
         scrollTable =new JScrollPane(windTable);
         scrollTable.setBounds(200,200,700,400);
+        TableColumn fileColumn = windTable.getColumnModel().getColumn(5);
+        fileColumn.setCellEditor(new DefaultCellEditor(turbineComboBox));
+
+
         windFarmObject = new JSONObject();
         windFarmObject.put("n_turbines", countTurbine);
 
@@ -60,7 +70,7 @@ public class WindfarmJPanel extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 countTurbine = countTurbine +1;
                 turbineLabel.setText("Number of Turbines: " + Integer.toString(countTurbine));
-                model.addRow(new Object[]{Integer.toString(countTurbine), "1","2","3 ","0","0","0","0","0","0"});
+                model.addRow(new Object[]{Integer.toString(countTurbine), "0","0","0 ","0"," ","0","0","0","0"});
             }
         });
         //saving the data from the JTable into new JSON Objects.

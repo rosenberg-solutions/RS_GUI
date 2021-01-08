@@ -114,7 +114,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
                 simulationObject =new JSONObject();
                 simulationObject.put("simulation",simulation);
 
-                System.out.println(simulationObject);
+                System.out.println(simulation);
             }
         });
 
