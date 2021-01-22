@@ -46,35 +46,35 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
         //DOE File
         DOE = new JLabel("DOE");
-        DOE.setBounds(200,100,100,50);
+        DOE.setBounds(200,150,150,50);
 
 
         //DOE FileName
         DOEFile = new JLabel("DOE File Name");
-        DOEFile.setBounds(200,190, 100,50);
+        DOEFile.setBounds(200,190, 200,50);
         DOEFileField = new JTextField(30);
         DOEFileField.setBounds(350, 200, 200,30);
         //Start time
 
-        timeStart = new JLabel("Time Start (0.0)");
-        timeStart.setBounds(200,250,100,50);
+        timeStart = new JLabel("Time Step [s]");
+        timeStart.setBounds(200,250,150,50);
         timeStartField = new JTextField(15);
         timeStartField.setBounds(350,250, 100,30);
 
         // End time
-        timeEnd = new JLabel(" Time End  (0.0)");
-        timeEnd.setBounds(200,300, 100,50);
+        timeEnd = new JLabel(" Time End [s]");
+        timeEnd.setBounds(200,300, 150,50);
         timeEndField = new JTextField(15);
         timeEndField.setBounds(350,300, 100,30);
 
         //dt
-        dt = new JLabel("dt (0.0)");
-        dt.setBounds(200,350,100,50);
+        dt = new JLabel("dt [s]");
+        dt.setBounds(200,350,150,50);
         dtField = new JTextField(15);
         dtField.setBounds(350,350,100,30);
 
         //relaxation Factor
-        relaxationFactor = new JLabel("Relaxation Factor (0.0)");
+        relaxationFactor = new JLabel("Relaxation Factor [-]");
         relaxationFactor.setBounds(200,400,150,30);
         relaxationFactorField = new JTextField(15);
         relaxationFactorField.setBounds(350,400,100,30);
@@ -82,7 +82,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
         // True or false Combobox
         TF = new JComboBox<String>(trueFalse);
-        TF.setBounds(250,100,100,50);
+        TF.setBounds(350,150,100,50);
         TF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +90,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
                 }
                 if(TF.getSelectedItem() =="True"){
-                    //create dEO file
+                    
 
                 }
 
@@ -99,7 +99,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
         //save button
         save = new JButton("save");
-        save.setBounds(350,450,100,30);
+        save.setBounds(700,570,100,30);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,9 +110,9 @@ public class SimulationJPanel extends JFrame implements ActionListener {
                 simulation.put("timeEnd",timeEndField.getText());
                 simulation.put("dt",dtField.getText());
                 simulation.put("relaxation_factor",relaxationFactorField.getText());
-
                 simulationObject =new JSONObject();
                 simulationObject.put("simulation",simulation);
+
 
                 System.out.println(simulation);
             }

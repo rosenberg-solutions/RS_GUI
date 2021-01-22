@@ -89,7 +89,7 @@ public class WriteJPanel extends JFrame {
 
         //Save button
          save = new JButton("Save");
-         save.setBounds(500,600,100,30);
+         save.setBounds(700,570,100,50);
          save.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {

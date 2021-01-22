@@ -51,58 +51,58 @@ public class WindJPanel extends JFrame {
         type = new JLabel("Type");
         type.setBounds(200,100,100,50);
         types= new JComboBox<String>(typeWind);
-        types.setBounds(350,100,200,50);
+        types.setBounds(450,100,200,50);
 
 
         //shear
-        shear = new JLabel("Shear");
-        shear.setBounds(200,190, 100,50);
+        shear = new JLabel("Power Law Exponent[-]");
+        shear.setBounds(200,190, 200,50);
         shearField = new JTextField(30);
-        shearField.setBounds(350, 200, 200,30);
+        shearField.setBounds(450, 200, 200,30);
 
         //u_mean
-        u_mean = new JLabel("U_mean");
-        u_mean.setBounds(200,250,100,50);
+        u_mean = new JLabel("Mean Wind Speed [m/s]");
+        u_mean.setBounds(200,250,200,50);
         u_meanField = new JTextField(15);
-        u_meanField.setBounds(350,250, 150,30);
+        u_meanField.setBounds(450,250, 150,30);
 
         // rho
-        rho = new JLabel("Rho");
-        rho.setBounds(200,300, 100,50);
+        rho = new JLabel("Air Density [kg/m^3]");
+        rho.setBounds(200,300, 200,50);
         rhoField = new JTextField(15);
-        rhoField.setBounds(350,300, 100,30);
+        rhoField.setBounds(450,300, 100,30);
 
         //h_ref
-        h_ref = new JLabel("H_ref");
-        h_ref.setBounds(200,350,100,50);
+        h_ref = new JLabel("Mean Wind Speed Reference Height[m]");
+        h_ref.setBounds(200,350,240,50);
         h_refField = new JTextField(15);
-        h_refField.setBounds(350,350,100,30);
+        h_refField.setBounds(450,350,100,30);
 
         //direction make json array
-        direction = new JLabel("Direction");
-        direction.setBounds(200,400,150,30);
+        direction = new JLabel("Wind Direction Unit Vector");
+        direction.setBounds(200,400,200,30);
         directionField = new JTextField(15);
         //directionField.setBounds(350,400,100,30);
 
         //separate GUI field for getting direction coordinates
-        X = new JLabel("X_Coordinate");
-        X.setBounds(350,400,100,30);
+        X = new JLabel("X-Component");
+        X.setBounds(450,400,100,30);
         xField = new JTextField(10);
-        xField.setBounds(450,400,100,30);
+        xField.setBounds(550,400,100,30);
 
-        Y = new JLabel("Y_Coordinate");
-        Y.setBounds(350,420,100,30);
+        Y = new JLabel("Y-Component");
+        Y.setBounds(450,420,100,30);
         yField = new JTextField(10);
-        yField.setBounds(450,420,100,30);
+        yField.setBounds(550,420,100,30);
 
-        Z = new JLabel("Z_Coordinate");
-        Z.setBounds(350,440,100,30);
+        Z = new JLabel("Z_Component");
+        Z.setBounds(450,440,100,30);
         zField = new JTextField(10);
-        zField.setBounds(450,440,100,30);
+        zField.setBounds(550,440,100,30);
 
         //save button
         save = new JButton("Save");
-        save.setBounds(300,600,100,50);
+        save.setBounds(700,570,100,50);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,17 +111,17 @@ public class WindJPanel extends JFrame {
                 coordinates = new JSONArray();
                 windObject = new JSONObject();
                 wind.put("type",types.getSelectedItem());
-                wind.put("shear",shearField.getText());
-                wind.put("u_mean", u_meanField.getText());
-                wind.put("h_ref",h_refField.getText());
-                wind.put("rho",rhoField.getText());
+                wind.put("Shear",shearField.getText());
+                wind.put("U_mean", u_meanField.getText());
+                wind.put("H_ref",h_refField.getText());
+                wind.put("Rho",rhoField.getText());
 
                 //creating a Json array for direction coordinates
 
                 coordinates.put(xField.getText());
                 coordinates.put(yField.getText());
                 coordinates.put(zField.getText());
-                wind.put("direction",coordinates);
+                wind.put("Direction",coordinates);
 
                 //adding all Json objects to json array windObject
                 //windObject.put("wind", wind);
