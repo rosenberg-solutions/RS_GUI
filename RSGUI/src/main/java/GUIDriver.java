@@ -53,35 +53,17 @@ public class GUIDriver {
         JSONObject filetype = new JSONObject();
 
 
-//        JButton saveButton = new JButton("save");
-//        saveButton.setBounds(800,600,75,25);
-//        saveButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                filetype.put("name",nameField.getText());
-//                filetype.put("version", versionCombobox.getSelectedItem());
-//                versionCombobox.getSelectedItem();
-//                System.out.println(filetype);
-//            }
-//        });
-
         
         frame.add(writeFile);
         frame.add(nameLabel);
         frame.add(nameField);
         frame.add(versionLabel);
         frame.add(versionCombobox);
-        //frame.add(saveButton);
         frame.add(versionLabel);
-        frame.add(tp);
-       // tp.add("Home", home.getJPanel());
         tp.add("Simulation", simulation.getJPanel());
         tp.add("Wind", wind.getJPanel());
         tp.add("Write", write.getJPanel());
         tp.add("Turbine", windfarm.getJPanel());
-        tp.add("Review File", review.getJPanel());
-        
         frame.add(tp);
 
 

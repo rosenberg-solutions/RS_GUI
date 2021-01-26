@@ -14,7 +14,7 @@ public class WindfarmJPanel extends JFrame {
     static private JPanel p;
     static private JButton add, save;
     static private JLabel numTurbine, turbineLabel, idLabel, xlabel,rmpLabel, pitchLabel, fileLabel, initIndDistLabel, initInductionLabel,nRotLabel, rot_trefftzLabel;
-    private int countTurbine =0;
+    private int countTurbine =-1;
     static private JSONObject windFarmObject,turbine, n_turbines, ID, X, rpm, pitch, outputFile, initIndDist, initInduction, nRot, rot_trefftz;
     static private JTable windTable;
     static private JScrollPane scrollTable;
@@ -33,29 +33,38 @@ public class WindfarmJPanel extends JFrame {
         //add button to add multiple turbine
         add = new JButton("Add Turbine");
         add.setBounds(350,50,125,30);
-        turbineLabel = new JLabel("Number of Turbines: " + Integer.toString(countTurbine));
+        turbineLabel = new JLabel("Number of Turbines: " + Integer.toString(countTurbine+1 ));
         turbineLabel.setBounds(200,50,150,30);
         save = new JButton( "save");
         save.setBounds(500,650,100,30);
 
         //Creating a table for turbine input data
         DefaultTableModel model= new DefaultTableModel(); //this default will allow rows to be added
-        model.addColumn("n_turbines");
+
         model.addColumn("ID");
-        model.addColumn("x");
-        model.addColumn("rpm");
-        model.addColumn("pitch");
+        model.addColumn("Tower Base X [m]");
+        model.addColumn("Tower Base Y [m]");
+        model.addColumn("Tower Base z [m]");
+        model.addColumn("Rotor Speed [RPM]");
+        model.addColumn("Blade Pitch [deg]");
         model.addColumn("Input File ");
-        model.addColumn("initIndDist");
-        model.addColumn("initInduction");
-        model.addColumn("nRot");
-        model.addColumn("rot_trefftz");
+        model.addColumn("Induction Factor[-]");
+        model.addColumn("Vortex Lattice Rotations [-]");
+        model.addColumn("Trefftz Plane Rotations[-]");
+
 
         turbineComboBox = new JComboBox<>(optionTurbine);
         windTable = new JTable(model);
-        scrollTable =new JScrollPane(windTable);
-        scrollTable.setBounds(200,200,700,400);
-        TableColumn fileColumn = windTable.getColumnModel().getColumn(5);
+        windTable.setRowHeight(100);
+        windTable.getAutoResizeMode();
+
+
+
+
+        scrollTable  =new JScrollPane(windTable);
+        scrollTable.setBounds(200,200,800,400);
+
+        TableColumn fileColumn = windTable.getColumnModel().getColumn(6);
         fileColumn.setCellEditor(new DefaultCellEditor(turbineComboBox));
 
 
@@ -81,8 +90,8 @@ public class WindfarmJPanel extends JFrame {
               //  windFarmObject.put("turbine", model.getDataVector().elementAt(windTable.getSelectedRow()));
               turbine  = new JSONObject();
                 turbine.put(("ID"),model.getValueAt(0,1));
-                turbine.put(("X"),model.getValueAt(0,2));
 
+                turbine.put(("X"),model.getValueAt(0,2));
                 System.out.println(turbine);
             }
         });

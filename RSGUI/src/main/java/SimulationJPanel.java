@@ -2,7 +2,10 @@ package main.java;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import org.json.JSONObject;
+import javax.swing.JRadioButton;
 public class SimulationJPanel extends JFrame implements ActionListener {
 
     static private JPanel p;
@@ -80,22 +83,47 @@ public class SimulationJPanel extends JFrame implements ActionListener {
         relaxationFactorField.setBounds(350,400,100,30);
 
 
-        // True or false Combobox
-        TF = new JComboBox<String>(trueFalse);
-        TF.setBounds(350,150,100,50);
-        TF.addActionListener(new ActionListener() {
+        // True or false Radio Buttons
+        JRadioButton trueButton = new JRadioButton("true");
+        trueButton.setBounds(350,125,100,100);
+
+        //if DOE file is true then will write to JSON file
+        trueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(TF.getSelectedItem() =="False"){
-
-                }
-                if(TF.getSelectedItem() =="True"){
-                    
-
-                }
+                DOEFileField.setEditable(true);
+                timeEndField.setEditable(true);
+                timeEndField.setEditable(true);
+                timeStartField.setEditable(true);
+                dtField.setEditable(true);
+                relaxationFactorField.setEditable(true);
 
             }
         });
+        JRadioButton falseButton = new JRadioButton("false");
+        falseButton.setBounds(425,125,100,100);
+        //when false button is clicked set textfields to non-editable
+        falseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DOEFileField.setEditable(false);
+                timeEndField.setEditable(false);
+                timeEndField.setEditable(false);
+                timeStartField.setEditable(false);
+                dtField.setEditable(false);
+                relaxationFactorField.setEditable(false);
+            }
+        });
+
+        //creating a button group that only allows one button to be clicked from the group
+        ButtonGroup group = new ButtonGroup();
+        group.add(trueButton);
+        group.add(falseButton);
+
+        p.add(trueButton);
+        p.add(falseButton);
+        pack();
+
 
         //save button
         save = new JButton("save");
@@ -103,8 +131,16 @@ public class SimulationJPanel extends JFrame implements ActionListener {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //loop through button to see which one is selected. Don't like this but is what I could get to work for now
+                String button= "";
+                if(trueButton.isSelected()){
+                    button = "true";
+                }
+                else if(falseButton.isSelected()){
+                    button = "false";
+                }
                 simulation = new JSONObject();
-                simulation.put("DOE", TF.getSelectedItem());
+                simulation.put("DOE", button);
                 simulation.put("DOE_File", DOEFileField.getText());
                 simulation.put("timeStart",timeStartField.getText());
                 simulation.put("timeEnd",timeEndField.getText());
@@ -121,7 +157,7 @@ public class SimulationJPanel extends JFrame implements ActionListener {
 
         //adding components to panel
         p.add(DOE);
-        p.add(TF);
+
         p.add(DOEFile);
         p.add(DOEFileField);
         p.add(timeStart);
